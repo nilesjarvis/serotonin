@@ -39,7 +39,23 @@ Built with React, Vite, and Tailwind CSS, it visualizes your Jellyfin server's r
 4. Open your browser to `http://localhost:5173`.
 5. Enter your Jellyfin server URL (e.g., `http://192.168.1.100:8096`), your admin username, and your password.
 
-## Building for Production
+## Hosting on your Server (Automated Script)
+
+If you are running serotonin directly on your Linux machine alongside Jellyfin (e.g. Debian, Ubuntu, Proxmox, Raspberry Pi), you can use the automated deployment script! 
+
+This script will securely build the application, install the Nginx web server, properly handle React Router static file configuration, and launch it over your local network automatically on port 80.
+
+```bash
+# Navigate to the serotonin directory
+cd serotonin
+
+# Run the deployment script with sudo privileges
+sudo ./install.sh
+```
+
+You can then view the dashboard from any device on your Wi-Fi by typing your server's local IP address into your browser (e.g., `http://192.168.1.100`).
+
+## Building for Production (Manual)
 
 If you want to host serotonin yourself statically (e.g., on Vercel, Netlify, or via Nginx):
 
