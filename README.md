@@ -58,6 +58,7 @@ serotonin bypasses the standard, limited plugin endpoints and directly executes 
 
 - **"Authentication Failed / Network Error"**: Ensure you typed your server URL correctly (including the port `http://YOUR_IP:8096`).
 - **"CORS Error" in browser console**: Your Jellyfin server is rejecting the connection from your browser. Go into your Jellyfin Admin Dashboard -> Networking -> check "Enable cross-origin resource sharing (CORS)" and restart the Jellyfin server.
+- **"Cannot find native binding" during build**: This is a known npm bug with Tailwind CSS v4's Rust engine. Run `rm -rf node_modules package-lock.json && npm install` to force npm to download the correct native dependencies for your specific server's CPU architecture.
 - **No data is showing up**: Make sure the Playback Reporting plugin is installed and that you have actually watched media since it was installed.
 
 ## Tech Stack
