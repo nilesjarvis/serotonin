@@ -7,7 +7,8 @@ import {
   Music, 
   Video, 
   PlaySquare, 
-  LogOut 
+  LogOut,
+  FileWarning
 } from 'lucide-react';
 import { logout } from '../lib/api';
 
@@ -18,6 +19,7 @@ const navItems = [
   { name: 'Music', path: '/library/Audio', icon: <Music className="w-5 h-5" /> },
   { name: 'Music Videos', path: '/library/MusicVideo', icon: <PlaySquare className="w-5 h-5" /> },
   { name: 'Home Videos', path: '/library/Video', icon: <Video className="w-5 h-5" /> },
+  { name: 'Data Audit', path: '/audit', icon: <FileWarning className="w-5 h-5" /> },
 ];
 
 export default function Layout({ children }) {

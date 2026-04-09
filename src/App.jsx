@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import UserProfile from './pages/UserProfile';
 import LibraryView from './pages/LibraryView';
+import DataAudit from './pages/DataAudit';
 import { getToken } from './lib/api';
 
 function ProtectedRoute({ children }) {
@@ -43,6 +44,15 @@ function App() {
           element={
             <ProtectedRoute>
               <LibraryView />
+            </ProtectedRoute>
+          } 
+        />
+
+        <Route 
+          path="/audit" 
+          element={
+            <ProtectedRoute>
+              <DataAudit />
             </ProtectedRoute>
           } 
         />

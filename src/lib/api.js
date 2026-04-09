@@ -198,6 +198,20 @@ export async function getTopArtists(limit = 20, days = 3650) {
   return getCustomQuery(query.replace(/\n\s+/g, ' ').trim(), false);
 }
 
+export async function getSuspiciousActivity(limit = 100) {
+  // Query PlaybackActivity for single playback events that exceed 20 minutes (1200 seconds)
+  // This is primarily an issue with Audio, but could affect other media if they pause it.
+  const query = `
+    SELECT DateCreated, ItemId, ItemName, ItemType, ClientName, PlayDuration
+    FROM PlaybackActivity 
+    WHERE PlayDuration > 1200 
+    ORDER BY PlayDuration DESC 
+    LIMIT ${limit}
+  `;
+
+  return getCustomQuery(query.replace(/\n\s+/g, ' ').trim(), false);
+}
+
 export async function getItemsMetadata(itemIds) {
   const userId = getUserId();
   if (!userId || !itemIds || itemIds.length === 0) return { Items: [] };
@@ -211,7 +225,7 @@ export async function getItemsMetadata(itemIds) {
     const batch = itemIds.slice(i, i + batchSize);
     const idsParam = batch.join(',');
     try {
-      const res = await jellyfinFetch(`/Users/${userId}/Items?Ids=${idsParam}&Fields=PrimaryImageAspectRatio,SeriesPrimaryImageTag,ArtistItems`);
+      const res = await jellyfinFetch(`/Users/${userId}/Items?Ids=${idsParam}&Fields=PrimaryImageAspectRatio,SeriesPrimaryImageTag,ArtistItems,RunTimeTicks`);
       if (res && res.Items) {
         allItems = allItems.concat(res.Items);
       }
